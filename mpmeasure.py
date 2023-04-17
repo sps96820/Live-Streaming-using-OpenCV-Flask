@@ -1,6 +1,5 @@
 import cv2
 from math import sqrt
-from pip import main
 import time
 from PIL import Image, ImageTk
 import mediapipe as mp

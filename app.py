@@ -1,7 +1,6 @@
 from flask import Flask, render_template, Response, request
 import cv2
 import threading
-from connector import connector
 from camClass import camClass
 app = Flask(__name__)
 
