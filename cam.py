@@ -15,7 +15,7 @@ import connector
 
 
 # Define a function to update the webcam output
-def update_frame(q, heightq, armq, shoulderq, instructionq, connect):
+def update_frame(q, heightq, armq, shoulderq, instructionq):
     global label
     calibBool = False
     while True:
@@ -98,7 +98,7 @@ def update_frame(q, heightq, armq, shoulderq, instructionq, connect):
             #if calibFrameUpdate.threedpoints:
                 #frame = cv2.drawChessboardCorners(frame, calibFrameUpdate.CHECKERBOARD, calibFrameUpdate.corners2, calibFrameUpdate.ret)
         
-        connect.setImage(frame)
+        #connect.setImage(frame)
         #cv2.imshow("image", frame)
         key = cv2.waitKey(1)
         if key == 27:
@@ -110,7 +110,7 @@ def update_frame(q, heightq, armq, shoulderq, instructionq, connect):
             #update_frame(imagearr)
 
 # Function for main
-def main(connect):
+def main():
     time.sleep(4)
     global cap
     global sca
@@ -155,7 +155,7 @@ def main(connect):
     global im 
     im = threading.Thread(target = imaging, args=(q, heightq, armq, shoulderq, instructionq))
     im.start()
-    update_frame(q, heightq, armq, shoulderq, instructionq, connect)
+    update_frame(q, heightq, armq, shoulderq, instructionq)
 
 def imaging(q, heightq, armq, shoulderq, instructionq):
     instructionq.put("start")
