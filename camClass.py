@@ -179,7 +179,15 @@ class camClass:
                     results.pose_landmarks,
                     self.mp_pose.POSE_CONNECTIONS,
                     landmark_drawing_spec=self.mp_drawing_styles.get_default_pose_landmarks_style())
-            
+        
+        
+        self.sca.scale(frame)
+        if self.sca.bboxs:
+            self.sca.scale(frame)
+            int_corners = np.int0(self.sca.bboxs)
+            cv2.polylines(frame, int_corners, True, (0, 255, 0), 2)    
+       
+       
         if results.pose_landmarks != None:
             rshoulder = results.pose_landmarks.landmark[self.mp_pose.PoseLandmark.RIGHT_SHOULDER]
             lshoulder = results.pose_landmarks.landmark[self.mp_pose.PoseLandmark.LEFT_SHOULDER]
@@ -227,11 +235,10 @@ class camClass:
                 
                 #cv2.circle(frame, (int(relbowx), int(relbowy)), 10, (0, 0, 255), -1)
 
-        self.sca.scale(frame)
-        if self.sca.bboxs:
-            self.sca.scale(frame)
-            int_corners = np.int0(self.sca.bboxs)
-            cv2.polylines(frame, int_corners, True, (0, 255, 0), 2)
-            
         _, frame = cv2.imencode('.jpg', frame)
         return frame.tobytes()
+    
+    def clear(self):
+        self.arml = 0
+        self.shoulderl = 0
+        self.height = 0
